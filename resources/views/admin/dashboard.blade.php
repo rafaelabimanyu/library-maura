@@ -43,9 +43,9 @@
     <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
         <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white">
             <h2 class="text-lg font-semibold text-slate-900">Data Buku Terbaru</h2>
-            <button class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors">
+            <a href="{{ route('books.create') }}" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors">
                 + Tambah Buku
-            </button>
+            </a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">

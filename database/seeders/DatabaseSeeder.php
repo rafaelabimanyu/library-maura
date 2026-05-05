@@ -32,5 +32,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@maura.com',
             'role' => 'pengunjung',
         ]);
+
+        $this->call([
+            BookSeeder::class,
+        ]);
     }
 }

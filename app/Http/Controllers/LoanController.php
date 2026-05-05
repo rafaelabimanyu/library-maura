@@ -84,4 +84,15 @@ class LoanController extends Controller
 
         return redirect()->back()->with('success', 'Buku berhasil dikembalikan tepat waktu.');
     }
+
+    public function myLoans()
+    {
+        $loans = Loan::with('book')
+                     ->where('user_id', auth()->id())
+                     ->orderBy('status')
+                     ->latest('loan_date')
+                     ->paginate(10);
+
+        return view('visitor.my-loans', compact('loans'));
+    }
 }
