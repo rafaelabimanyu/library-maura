@@ -19,10 +19,14 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin Routes
-Route::middleware(['auth', 'role:admin,petugas'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/books/create', [\App\Http\Controllers\BookController::class, 'create'])->name('books.create');
-    Route::post('/books', [\App\Http\Controllers\BookController::class, 'store'])->name('books.store');
+Route::middleware(['auth', 'role:admin,petugas'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
+    
+    Route::resource('books', \App\Http\Controllers\Admin\AdminBookController::class)->except(['show']);
+    Route::resource('loans', \App\Http\Controllers\Admin\AdminLoanController::class)->only(['index', 'create', 'store']);
+    Route::post('loans/{id}/return', [\App\Http\Controllers\LoanController::class, 'returnBook'])->name('loans.return');
+    
+    Route::resource('members', \App\Http\Controllers\Admin\AdminUserController::class)->only(['index']);
 });
 
 // Visitor Routes

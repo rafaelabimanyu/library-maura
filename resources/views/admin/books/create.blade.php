@@ -28,7 +28,7 @@
     @endif
 
     <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-        <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data" class="p-8">
+        <form action="{{ route('admin.books.store') }}" method="POST" enctype="multipart/form-data" class="p-8">
             @csrf
             
             <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
