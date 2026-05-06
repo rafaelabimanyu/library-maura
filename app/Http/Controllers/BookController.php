@@ -19,9 +19,20 @@ class BookController extends Controller
                   ->orWhere('author', 'like', "%{$search}%");
         }
 
+        if ($request->filled('category')) {
+            $categorySlug = $request->category;
+            $query->whereHas('category', function($q) use ($categorySlug) {
+                $q->where('slug', $categorySlug);
+            });
+        }
+
         $books = $query->latest()->paginate(12);
 
-        return view('visitor.home', compact('books'));
+        $totalBooks = \App\Models\Book::count();
+        $activeMembers = \App\Models\User::where('role', 'pengunjung')->count();
+        $activeLoans = \App\Models\Loan::where('status', 'borrowed')->count();
+
+        return view('visitor.home', compact('books', 'totalBooks', 'activeMembers', 'activeLoans'));
     }
 
     public function create()
