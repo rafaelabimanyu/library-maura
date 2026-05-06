@@ -1,58 +1,123 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Library Maura
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Library Maura** adalah aplikasi sistem informasi perpustakaan modern berbasis web yang dirancang untuk memberikan pengalaman terbaik (UX) bagi pengunjung dan pustakawan. Dibangun dengan ekosistem Laravel modern, aplikasi ini menawarkan antarmuka yang indah, interaktif, dan performa yang sangat cepat.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi ini dikembangkan menggunakan teknologi terkini:
+- **Laravel 11**: Framework PHP modern untuk backend yang solid.
+- **Tailwind CSS**: Framework CSS utility-first untuk styling yang cepat dan responsif.
+- **Alpine.js**: Framework JavaScript ringan untuk interaktivitas frontend (Modal, Dropdown, Tabs).
+- **Laravel Breeze**: Starter kit autentikasi minimalis namun kuat.
+- **MySQL**: Sistem manajemen basis data relasional.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ✨ Key Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 👤 User/Visitor (Public Area)
+- **Pencarian Buku Real-time**: Cari buku berdasarkan judul, penulis, atau ISBN dengan cepat.
+- **Filter Kategori Dinamis**: Jelajahi buku berdasarkan kategori spesifik.
+- **Detail Buku Interaktif**: Tampilan detail buku menggunakan Modal Alpine.js yang elegan tanpa memuat ulang halaman.
+- **Sistem Peminjaman**: Pengunjung dapat mengajukan peminjaman buku dengan mudah.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🛡️ Admin/Librarian (Secure Area)
+- **Dashboard Premium**: Antarmuka admin eksklusif dengan tema Slate & Indigo yang profesional.
+- **Manajemen Buku (CRUD)**: Kelola katalog buku (Tambah, Edit, Hapus, Detail) dengan mudah.
+- **Manajemen Member**: Mengelola data anggota perpustakaan.
+- **Sirkulasi Peminjaman Otomatis**: Sistem persetujuan, peminjaman, dan pengembalian yang terintegrasi langsung dengan update stok buku otomatis.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🛠️ Installation Guide
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Ikuti langkah-langkah detail ini untuk menjalankan aplikasi Library Maura di lingkungan lokal Anda:
 
-```bash
-composer require laravel/boost --dev
+1. **Clone repository ini:**
+   ```bash
+   git clone <repository-url>
+   cd library-maura
+   ```
 
-php artisan boost:install
-```
+2. **Install dependensi PHP dan Node.js:**
+   ```bash
+   composer install
+   npm install
+   ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+3. **Konfigurasi Environment:**
+   Duplikat file `.env.example` menjadi `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   Atur koneksi database Anda di dalam file `.env`:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=library_maura
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-## Contributing
+4. **Generate Application Key:**
+   ```bash
+   php artisan key:generate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. **Jalankan Migrasi dan Seeder:**
+   Ini akan membuat struktur tabel dan mengisi data awal (termasuk akun admin).
+   ```bash
+   php artisan migrate --seed
+   ```
+   > **Note:** Akun admin default yang di-generate oleh seeder:
+   > - **Email:** `admin@maura.com`
+   > - **Password:** `password`
 
-## Code of Conduct
+6. **Jalankan Aplikasi:**
+   Buka 2 terminal terpisah dan jalankan perintah berikut:
+   
+   Terminal 1 (Menjalankan server Laravel):
+   ```bash
+   php artisan serve
+   ```
+   
+   Terminal 2 (Menjalankan Vite untuk memproses asset):
+   ```bash
+   npm run dev
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Aplikasi sekarang dapat diakses melalui `http://localhost:8000`.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📁 Project Structure
 
-## License
+Selama pengembangan, kami melakukan refactoring modular pada struktur tampilan (`resources/views`) untuk memastikan kode bersih dan mudah dikelola:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **`resources/views/components/`**: Berisi komponen Blade yang dapat digunakan kembali.
+- **`resources/views/visitor/`**: Modularisasi khusus untuk area publik (Visitor):
+  - **`components/`**: Komponen spesifik untuk halaman visitor (seperti `book-card`, `category-filter`).
+  - **`layouts/`**: Layout utama untuk halaman publik.
+  - **`pages/`**: Halaman spesifik seperti Beranda, Katalog, dll.
+- **`resources/views/admin/`**: Area khusus untuk dashboard dan fitur admin.
+
+Pendekatan modular ini pada `visitor/components` memungkinkan pemisahan tanggung jawab yang lebih baik dan memudahkan pemeliharaan UI di masa mendatang.
+
+---
+
+## 🖼️ UI Preview
+
+| Home Page / Catalog | Admin Dashboard |
+| :---: | :---: |
+| ![Home Page Placeholder](https://via.placeholder.com/600x400?text=Home+Page+UI) | ![Admin Dashboard Placeholder](https://via.placeholder.com/600x400?text=Admin+Dashboard+UI) |
+
+---
+
+## 💡 Closing
+
+**Library Maura** dibangun dengan filosofi bahwa aplikasi perpustakaan tidak hanya harus fungsional, tetapi juga memberikan kesan visual yang memukau. Kami sangat mengutamakan User Experience (UX) modern untuk memastikan setiap interaksi terasa mulus, responsif, dan premium.
+
+Terima kasih telah mengeksplorasi proyek ini!
