@@ -11,22 +11,20 @@ class BookController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Book::with('category');
-
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where('title', 'like', "%{$search}%")
-                  ->orWhere('author', 'like', "%{$search}%");
-        }
-
-        if ($request->filled('category')) {
-            $categorySlug = $request->category;
-            $query->whereHas('category', function($q) use ($categorySlug) {
-                $q->where('slug', $categorySlug);
-            });
-        }
-
-        $books = $query->latest()->paginate(12);
+        $books = Book::with('category')
+            ->when($request->search, function ($q) use ($request) {
+                $q->where(function ($query) use ($request) {
+                    $query->where('title', 'like', '%' . $request->search . '%')
+                          ->orWhere('author', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->category, function ($q) use ($request) {
+                $q->whereHas('category', function ($query) use ($request) {
+                    $query->where('slug', $request->category);
+                });
+            })
+            ->latest()
+            ->paginate(12);
 
         $totalBooks = \App\Models\Book::count();
         $activeMembers = \App\Models\User::where('role', 'pengunjung')->count();
